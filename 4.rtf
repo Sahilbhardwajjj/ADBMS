@@ -1,0 +1,390 @@
+test> use school3
+switched to db school3
+school3> use companyDB
+switched to db companyDB
+companyDB> db.employees.insertMany([
+companyDB> db.employees.insertMany([
+|   { emp_id: 1, name: "Aarav", age: 25, dept: "HR", salary: 30companyDB> db.employees.insertMany([
+|   { emp_id: 1, name: "Aarav", age: 25, dept: "HR", salary: 30000 },
+companyDB> db.employees.insertMany([
+|   { emp_id: 1, name: "Aarav", age: 25, dept: "HR", salary: 30000 },
+|   { emp_id: 2, name: "Priya", age: 29, dept: "IT", salary: 50companyDB> db.employees.insertMany([
+|   { emp_id: 1, name: "Aarav", age: 25, dept: "HR", salary: 30000 },
+|   { emp_id: 2, name: "Priya", age: 29, dept: "IT", salary: 50000 },
+companyDB> db.employees.insertMany([
+|   { emp_id: 1, name: "Aarav", age: 25, dept: "HR", salary: 30000 },
+|   { emp_id: 2, name: "Priya", age: 29, dept: "IT", salary: 50000 },
+|   { emp_id: 3, name: "Rohan", age: 32, dept: "Finance", salary: 60000 },
+|   { emp_id: 4, name: "Sneha", age: 27, dept: "IT", salary: 45000 },
+|   { emp_id: 5, name: "Amit", age: 24, dept: "Sales", salary: 28000 },
+|   { emp_id: 6, name: "Neha", age: 30, dept: "Finance", salary: 55000 }
+| ])
+| 
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('690f7ab363dc910dcccee58d'),
+    '1': ObjectId('690f7ab363dc910dcccee58e'),
+    '2': ObjectId('690f7ab363dc910dcccee58f'),
+    '3': ObjectId('690f7ab363dc910dcccee590'),
+    '4': ObjectId('690f7ab363dc910dcccee591'),
+    '5': ObjectId('690f7ab363dc910dcccee592')
+  }
+}
+companyDB> db.employees.find({salary:{$gt:40000}})
+[
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58e'),
+    emp_id: 2,
+    name: 'Priya',
+    age: 29,
+    dept: 'IT',
+    salary: 50000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58f'),
+    emp_id: 3,
+    name: 'Rohan',
+    age: 32,
+    dept: 'Finance',
+    salary: 60000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee590'),
+    emp_id: 4,
+    name: 'Sneha',
+    age: 27,
+    dept: 'IT',
+    salary: 45000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee592'),
+    emp_id: 6,
+    name: 'Neha',
+    age: 30,
+    dept: 'Finance',
+    salary: 55000
+  }
+]
+companyDB> db.employees.find({age:{$lt:28}})
+[
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58d'),
+    emp_id: 1,
+    name: 'Aarav',
+    age: 25,
+    dept: 'HR',
+    salary: 30000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee590'),
+    emp_id: 4,
+    name: 'Sneha',
+    age: 27,
+    dept: 'IT',
+    salary: 45000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee591'),
+    emp_id: 5,
+    name: 'Amit',
+    age: 24,
+    dept: 'Sales',
+    salary: 28000
+  }
+]
+companyDB> db.employees.find({age:{$gte:25,$lte:30}})
+[
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58d'),
+    emp_id: 1,
+    name: 'Aarav',
+    age: 25,
+    dept: 'HR',
+    salary: 30000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58e'),
+    emp_id: 2,
+    name: 'Priya',
+    age: 29,
+    dept: 'IT',
+    salary: 50000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee590'),
+    emp_id: 4,
+    name: 'Sneha',
+    age: 27,
+    dept: 'IT',
+    salary: 45000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee592'),
+    emp_id: 6,
+    name: 'Neha',
+    age: 30,
+    dept: 'Finance',
+    salary: 55000
+  }
+]
+companyDB> db.employees.find({dept:{$ne:"IT"}})
+[
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58d'),
+    emp_id: 1,
+    name: 'Aarav',
+    age: 25,
+    dept: 'HR',
+    salary: 30000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58f'),
+    emp_id: 3,
+    name: 'Rohan',
+    age: 32,
+    dept: 'Finance',
+    salary: 60000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee591'),
+    emp_id: 5,
+    name: 'Amit',
+    age: 24,
+    dept: 'Sales',
+    salary: 28000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee592'),
+    emp_id: 6,
+    name: 'Neha',
+    age: 30,
+    dept: 'Finance',
+    salary: 55000
+  }
+]
+companyDB> db.employees.find({$or:[{dept:"IT"},{salary:{$lt:2000}}]})
+[
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58e'),
+    emp_id: 2,
+    name: 'Priya',
+    age: 29,
+    dept: 'IT',
+    salary: 50000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee590'),
+    emp_id: 4,
+    name: 'Sneha',
+    age: 27,
+    dept: 'IT',
+    salary: 45000
+  }
+]
+companyDB> db.employees.find({$or:[{dept:"IT"},{salary:{$lt:3000}}]})
+[
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58e'),
+    emp_id: 2,
+    name: 'Priya',
+    age: 29,
+    dept: 'IT',
+    salary: 50000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee590'),
+    emp_id: 4,
+    name: 'Sneha',
+    age: 27,
+    dept: 'IT',
+    salary: 45000
+  }
+]
+companyDB> db.employees.find({$or:[{dept:"IT"},{salary:{$lt:30000}}]})
+[
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58e'),
+    emp_id: 2,
+    name: 'Priya',
+    age: 29,
+    dept: 'IT',
+    salary: 50000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee590'),
+    emp_id: 4,
+    name: 'Sneha',
+    age: 27,
+    dept: 'IT',
+    salary: 45000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee591'),
+    emp_id: 5,
+    name: 'Amit',
+    age: 24,
+    dept: 'Sales',
+    salary: 28000
+  }
+]
+companyDB> db.employees.find({dept:"Finance",salary:{$gt:50000})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:52)
+
+> 1 | db.employees.find({dept:"Finance",salary:{$gt:50000})
+    |                                                     ^
+  2 |
+
+companyDB> db.employees.find({dept:"Finance",salary:{$gt:50000}})
+[
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58f'),
+    emp_id: 3,
+    name: 'Rohan',
+    age: 32,
+    dept: 'Finance',
+    salary: 60000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee592'),
+    emp_id: 6,
+    name: 'Neha',
+    age: 30,
+    dept: 'Finance',
+    salary: 55000
+  }
+]
+companyDB> db.employees.find({dept:{$in:["IT","Finance"]}})
+[
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58e'),
+    emp_id: 2,
+    name: 'Priya',
+    age: 29,
+    dept: 'IT',
+    salary: 50000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58f'),
+    emp_id: 3,
+    name: 'Rohan',
+    age: 32,
+    dept: 'Finance',
+    salary: 60000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee590'),
+    emp_id: 4,
+    name: 'Sneha',
+    age: 27,
+    dept: 'IT',
+    salary: 45000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee592'),
+    emp_id: 6,
+    name: 'Neha',
+    age: 30,
+    dept: 'Finance',
+    salary: 55000
+  }
+]
+companyDB> db.employees.find({salary:{$not:{$gt:50000}}})
+[
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58d'),
+    emp_id: 1,
+    name: 'Aarav',
+    age: 25,
+    dept: 'HR',
+    salary: 30000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58e'),
+    emp_id: 2,
+    name: 'Priya',
+    age: 29,
+    dept: 'IT',
+    salary: 50000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee590'),
+    emp_id: 4,
+    name: 'Sneha',
+    age: 27,
+    dept: 'IT',
+    salary: 45000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee591'),
+    emp_id: 5,
+    name: 'Amit',
+    age: 24,
+    dept: 'Sales',
+    salary: 28000
+  }
+]
+companyDB> db.employees.find({$and:[{$or:[{dpet:"Finance"},{dept:"IT"}]},{salary:{$not:{$lt;45000}}}]})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:80)
+
+> 1 | db.employees.find({$and:[{$or:[{dpet:"Finance"},{dept:"IT"}]},{salary:{$not:{$lt;45000}}}]})
+    |                                                                                 ^
+  2 |
+
+companyDB> db.employees.find({$and:[{$or:[{dpet:"Finance"},{dept:"IT"}]},{salary:{$not:{$lt:45000}}}]})
+[
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58e'),
+    emp_id: 2,
+    name: 'Priya',
+    age: 29,
+    dept: 'IT',
+    salary: 50000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee590'),
+    emp_id: 4,
+    name: 'Sneha',
+    age: 27,
+    dept: 'IT',
+    salary: 45000
+  }
+]
+companyDB> db.employees.find({$and:[{$or:[{dept:"Finance"},{dept:"IT"}]},{salary:{$not:{$lt:45000}}}]})
+[
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58e'),
+    emp_id: 2,
+    name: 'Priya',
+    age: 29,
+    dept: 'IT',
+    salary: 50000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee58f'),
+    emp_id: 3,
+    name: 'Rohan',
+    age: 32,
+    dept: 'Finance',
+    salary: 60000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee590'),
+    emp_id: 4,
+    name: 'Sneha',
+    age: 27,
+    dept: 'IT',
+    salary: 45000
+  },
+  {
+    _id: ObjectId('690f7ab363dc910dcccee592'),
+    emp_id: 6,
+    name: 'Neha',
+    age: 30,
+    dept: 'Finance',
+    salary: 55000
+  }
+]
+companyDB> 

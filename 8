@@ -1,0 +1,18 @@
+[
+  { "_id": 1, "name": "Alice", "age": 20, "department": "CS", "grade": 85 },
+  { "_id": 2, "name": "Bob", "age": 22, "department": "IT", "grade": 90 },
+  { "_id": 3, "name": "Carol", "age": 21, "department": "CS", "grade": 92 },
+  { "_id": 4, "name": "David", "age": 23, "department": "Math", "grade": 88 }
+]
+db.students.getIndexes()
+[
+  { "v": 2, "key": { "_id": 1 }, "name": "_id_" }
+]
+db.students.createIndex({ name: 1 })
+db.students.find({ name: "Alice" }).explain("executionStats")
+db.students.dropIndex({ name: 1 })
+db.students.createIndex({ department: 1, grade: -1 })
+db.students.find({ department: "CS" }).sort({ grade: -1 }).explain("executionStats")
+db.students.dropIndex({ department: 1, grade: -1 })
+db.students.createIndex({ name: 1 }, { unique: true })
+db.students.insertOne({ name: "Alice", age: 24, department: "CS", grade: 90 })

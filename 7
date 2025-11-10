@@ -1,0 +1,36 @@
+[
+  { "_id": 1, "item": "apple", "price": 10, "quantity": 5, "category": "fruit" },
+  { "_id": 2, "item": "banana", "price": 5, "quantity": 10, "category": "fruit" },
+  { "_id": 3, "item": "carrot", "price": 4, "quantity": 7, "category": "vegetable" },
+  { "_id": 4, "item": "apple", "price": 10, "quantity": 3, "category": "fruit" },
+  { "_id": 5, "item": "carrot", "price": 4, "quantity": 5, "category": "vegetable" }
+]
+db.sales.aggregate([
+  {
+    $group: {
+      _id: "$item",
+      totalQuantity: { $sum: "$quantity" },
+      totalSales: { $sum: { $multiply: ["$price", "$quantity"] } }
+    }
+  }
+])
+[
+  { "_id": "apple", "totalQuantity": 8, "totalSales": 80 },
+  { "_id": "banana", "totalQuantity": 10, "totalSales": 50 },
+  { "_id": "carrot", "totalQuantity": 12, "totalSales": 48 }
+]
+var mapFunction = function() {
+  emit(this.category, this.price * this.quantity);
+};
+
+
+var reduceFunction = function(keyCategory, valuesSales) {
+  return Array.sum(valuesSales);
+};
+db.sales.mapReduce(
+  mapFunction,
+  reduceFunction,
+  { out: "total_sales_by_category" }
+)
+db.sales.createIndex({ item: 1 })
+db.sales.find({ item: "apple" }).explain("executionStats")
