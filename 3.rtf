@@ -1,317 +1,34 @@
-test> use school2
-switched to db school2
-school2> db.collection("students")
-TypeError: db.collection is not a function
-school2> db.createCollection("students")
-{ ok: 1 }
-school2> db.students.insertMany([
-school2> db.students.insertMany([
-|   { roll_no: 1, name: "Aarav", age: 20, grade: "A", city: "Deschool2> db.students.insertMany([
-|   { roll_no: 1, name: "Aarav", age: 20, grade: "A", city: "Delhi" },
-school2> db.students.insertMany([
-|   { roll_no: 1, name: "Aarav", age: 20, grade: "A", city: "Delhi" },
-|   { roll_no: 2, name: "Priya", age: 21, grade: "B", city: "Muschool2> db.students.insertMany([
-|   { roll_no: 1, name: "Aarav", age: 20, grade: "A", city: "Delhi" },
-|   { roll_no: 2, name: "Priya", age: 21, grade: "B", city: "Mumbai" },
-|   { roll_no: 3, name: "Rohan", age: 19, grade: "A", city: "Pune" },
-|   { roll_no: 4, name: "Sneha", age: 22, grade: "C", city: "Bangalore" },
-|   { roll_no: 5, name: "Amit", age: 23, grade: "B", city: "Chennai" }
-| ])
-| 
-{
-  acknowledged: true,
-  insertedIds: {
-    '0': ObjectId('690f78198fe27124c81e199d'),
-    '1': ObjectId('690f78198fe27124c81e199e'),
-    '2': ObjectId('690f78198fe27124c81e199f'),
-    '3': ObjectId('690f78198fe27124c81e19a0'),
-    '4': ObjectId('690f78198fe27124c81e19a1')
-  }
-}
-school2> db.students.find()
-[
-  {
-    _id: ObjectId('690f78198fe27124c81e199d'),
-    roll_no: 1,
-    name: 'Aarav',
-    age: 20,
-    grade: 'A',
-    city: 'Delhi'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e199e'),
-    roll_no: 2,
-    name: 'Priya',
-    age: 21,
-    grade: 'B',
-    city: 'Mumbai'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e199f'),
-    roll_no: 3,
-    name: 'Rohan',
-    age: 19,
-    grade: 'A',
-    city: 'Pune'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e19a0'),
-    roll_no: 4,
-    name: 'Sneha',
-    age: 22,
-    grade: 'C',
-    city: 'Bangalore'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e19a1'),
-    roll_no: 5,
-    name: 'Amit',
-    age: 23,
-    grade: 'B',
-    city: 'Chennai'
-  }
-]
-school2> db.students.findOne()
-{
-  _id: ObjectId('690f78198fe27124c81e199d'),
-  roll_no: 1,
-  name: 'Aarav',
-  age: 20,
-  grade: 'A',
-  city: 'Delhi'
-}
-school2> db.students.find({},{name:1,grade:1})
-[
-  {
-    _id: ObjectId('690f78198fe27124c81e199d'),
-    name: 'Aarav',
-    grade: 'A'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e199e'),
-    name: 'Priya',
-    grade: 'B'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e199f'),
-    name: 'Rohan',
-    grade: 'A'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e19a0'),
-    name: 'Sneha',
-    grade: 'C'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e19a1'),
-    name: 'Amit',
-    grade: 'B'
-  }
-]
-school2> db.students.find({city:"Mumbai"})
-[
-  {
-    _id: ObjectId('690f78198fe27124c81e199e'),
-    roll_no: 2,
-    name: 'Priya',
-    age: 21,
-    grade: 'B',
-    city: 'Mumbai'
-  }
-]
-school2> db.students.find({grade:"A",city:"Delhi"})
-[
-  {
-    _id: ObjectId('690f78198fe27124c81e199d'),
-    roll_no: 1,
-    name: 'Aarav',
-    age: 20,
-    grade: 'A',
-    city: 'Delhi'
-  }
-]
-school2> db.studnets.find({$or:[{grade:"A"},{city:"Pune"}]})
+db.Students.insertMany([{ name: "Priya Sharma", age: 17, gender: "Female", roll_no: 101, grade: "A" }, { name: "Rajesh Kumar", age: 16, gender: "Male", roll_no: 102, grade: "B+" }, { name: "Sneha Patel", age: 18, gender: "Female", roll_no: 103, grade: "A-" }, { name: "Aman Singh", age: 17, gender: "Male", roll_no: 104, grade: "A" }, { name: "Divya Das", age: 16, gender: "Female", roll_no: 105, grade: "B+" }, { name: "Kiran Rao", age: 17, gender: "Male", roll_no: 106, grade: "B+" }]); 
 
-school2> db.studnets.find({$or:[{grade:"A"},{city:"Pune"}]})
+// 1. Find all documents
+db.Students.find();
 
-school2> db.students.find({$or:[{grade:"A"},{city:"Pune"}]})
-[
-  {
-    _id: ObjectId('690f78198fe27124c81e199d'),
-    roll_no: 1,
-    name: 'Aarav',
-    age: 20,
-    grade: 'A',
-    city: 'Delhi'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e199f'),
-    roll_no: 3,
-    name: 'Rohan',
-    age: 19,
-    grade: 'A',
-    city: 'Pune'
-  }
-]
-school2> db.students.find({age:{$gt:20}})
-[
-  {
-    _id: ObjectId('690f78198fe27124c81e199e'),
-    roll_no: 2,
-    name: 'Priya',
-    age: 21,
-    grade: 'B',
-    city: 'Mumbai'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e19a0'),
-    roll_no: 4,
-    name: 'Sneha',
-    age: 22,
-    grade: 'C',
-    city: 'Bangalore'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e19a1'),
-    roll_no: 5,
-    name: 'Amit',
-    age: 23,
-    grade: 'B',
-    city: 'Chennai'
-  }
-]
-school2> db.students.find({age:{$gte:20,$lte:22})
-Uncaught:
-SyntaxError: Unexpected token, expected "," (1:39)
+// 2. Find one document (Aman Singh)
+db.Students.findOne({ name: "Aman Singh" });
 
-> 1 | db.students.find({age:{$gte:20,$lte:22})
-    |                                        ^
-  2 |
+// 3. Find by condition (Students older than 17)
+db.Students.find({ age: { $gt: 17 } });
 
-school2> db.students.find({age:{$gte:20,$lte:22}})
-[
-  {
-    _id: ObjectId('690f78198fe27124c81e199d'),
-    roll_no: 1,
-    name: 'Aarav',
-    age: 20,
-    grade: 'A',
-    city: 'Delhi'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e199e'),
-    roll_no: 2,
-    name: 'Priya',
-    age: 21,
-    grade: 'B',
-    city: 'Mumbai'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e19a0'),
-    roll_no: 4,
-    name: 'Sneha',
-    age: 22,
-    grade: 'C',
-    city: 'Bangalore'
-  }
-]
-school2> db.students.find().sort({name:1})
-[
-  {
-    _id: ObjectId('690f78198fe27124c81e199d'),
-    roll_no: 1,
-    name: 'Aarav',
-    age: 20,
-    grade: 'A',
-    city: 'Delhi'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e19a1'),
-    roll_no: 5,
-    name: 'Amit',
-    age: 23,
-    grade: 'B',
-    city: 'Chennai'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e199e'),
-    roll_no: 2,
-    name: 'Priya',
-    age: 21,
-    grade: 'B',
-    city: 'Mumbai'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e199f'),
-    roll_no: 3,
-    name: 'Rohan',
-    age: 19,
-    grade: 'A',
-    city: 'Pune'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e19a0'),
-    roll_no: 4,
-    name: 'Sneha',
-    age: 22,
-    grade: 'C',
-    city: 'Bangalore'
-  }
-]
-school2> db.students.find().limit(3)
-[
-  {
-    _id: ObjectId('690f78198fe27124c81e199d'),
-    roll_no: 1,
-    name: 'Aarav',
-    age: 20,
-    grade: 'A',
-    city: 'Delhi'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e199e'),
-    roll_no: 2,
-    name: 'Priya',
-    age: 21,
-    grade: 'B',
-    city: 'Mumbai'
-  },
-  {
-    _id: ObjectId('690f78198fe27124c81e199f'),
-    roll_no: 3,
-    name: 'Rohan',
-    age: 19,
-    grade: 'A',
-    city: 'Pune'
-  }
-]
-school2> // 1. Find all documents
-db.students.find();
+// 4. Find with OR condition (Female students OR those younger than 18)
+db.Students.find({ $or: [{ gender: "Female" }, { age: { $lt: 18 } }] });
 
-// 2. Find one document
-db.students.findOne({ name: "Alice" });
+// 5. Projection (show only name and grade)
+db.Students.find({}, { name: 1, grade: 1, _id: 0 });
 
-// 3. Find by condition
-db.students.find({ age: { $gt: 20 } });
+// 6. Limit results (Limit to the first 2 documents)
+db.Students.find().limit(2);
 
-// 4. Find with OR condition
-db.students.find({ $or: [{ dept: "CS" }, { age: { $lt: 22 } }] });
+// 7. Find with AND condition (Students with age 17 AND grade "A")
+db.Students.find({ $and: [ { age: 17 }, { grade: "A" } ] });
 
-// 5. Projection (show only name and dept)
-db.students.find({}, { name: 1, dept: 1, _id: 0 });
+// 8. Skip results (Skip the first document)
+db.Students.find().skip(1);
 
-// 6. Limit results
-db.students.find().limit(2);
+// 9. Sort ascending by age
+db.Students.find().sort({ age: 1 });
 
-// 7. Skip results
-db.students.find().skip(1);
+// 10. Sort descending by age
+db.Students.find().sort({ age: -1 });
 
-// 8. Sort ascending
-db.students.find().sort({ age: 1 });
-
-// 9. Sort descending
-db.students.find().sort({ age: -1 });
-
-// 10. Count number of students
-db.students.find().count();
-
+// 11. Count number of students
+db.Students.find().count();
